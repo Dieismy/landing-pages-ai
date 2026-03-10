@@ -1,0 +1,6 @@
+{
+  "agentDirectory": ".claude/agents",
+  "defaultAgent": "maestro.md",
+  "projectName": "Landing Pages AI Squad",
+  "language": "pt-BR"
+}
