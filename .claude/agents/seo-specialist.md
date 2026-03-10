@@ -377,6 +377,68 @@ Email:
 
 4. Entregar specs para @backend implementar
 
+### `*seo-site`
+Estrategia SEO para site multi-pagina:
+
+1. **Keyword Mapping por Pagina** (evitar canibalizacao):
+```
+| Pagina | Keyword Principal | Keywords Secundarias | Intent |
+|--------|-------------------|---------------------|--------|
+| Home (LP) | [keyword principal do negocio] | [long-tails transacionais] | Transacional |
+| Sobre | [marca + historia] | [fundador, equipe] | Navegacional |
+| Servicos | [tipo de servico] | [cada servico especifico] | Comercial |
+| Portfolio | [cases + resultados] | [segmento + resultado] | Comercial |
+| Contato | [cidade + servico + contato] | [telefone, endereco] | Transacional |
+| Blog | [tema informativos] | [perguntas how-to] | Informacional |
+```
+
+2. **Title Tags unicos** (CADA pagina com title diferente):
+   - Home: `[Keyword Principal] | [Beneficio] — [Marca]`
+   - Sobre: `Sobre a [Marca] — [Diferencial] | [Marca]`
+   - Servicos: `[Servicos] em [Cidade] — [Marca]`
+   - Portfolio: `Cases e Resultados — [Marca]`
+   - Contato: `Contato — [Marca] | [Cidade]`
+   - Blog: `Blog — [Tema] | [Marca]`
+
+3. **Schema Markup por Pagina**:
+   - Home: Organization + FAQPage + Service
+   - Sobre: Organization (completo com founders)
+   - Servicos: Service (cada servico) + Offer
+   - Portfolio: CreativeWork ou ItemList
+   - Contato: LocalBusiness (com geo)
+   - Blog: BlogPosting (cada artigo) + BreadcrumbList
+   - TODAS: BreadcrumbList
+
+4. **Sitemap XML**:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>[URL]/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>[URL]/sobre.html</loc><priority>0.7</priority></url>
+  <url><loc>[URL]/servicos.html</loc><priority>0.9</priority></url>
+  <url><loc>[URL]/portfolio.html</loc><priority>0.8</priority></url>
+  <url><loc>[URL]/contato.html</loc><priority>0.8</priority></url>
+  <url><loc>[URL]/blog.html</loc><priority>0.6</priority></url>
+</urlset>
+```
+
+5. **Internal Linking Strategy**:
+   - Home → Servicos (CTAs nos beneficios)
+   - Home → Portfolio (secao de cases)
+   - Servicos → Contato (CTA de cada servico)
+   - Blog → Servicos (links contextuais nos artigos)
+   - Todas → Home (logo na navbar)
+   - Maximizar link juice para paginas de conversao (Servicos, Contato)
+
+6. **Robots.txt**:
+```
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thank-you.html
+Sitemap: [URL]/sitemap.xml
+```
+
 ## Colaboracao
 
 - **Recebe de**: @writer (briefing, nicho, publico), Cliente (keywords desejadas, contas analytics)

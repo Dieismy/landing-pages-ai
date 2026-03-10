@@ -137,6 +137,43 @@ Revisar o design implementado pelo @frontend:
 | Playfair Display (bold) | Montserrat (regular) | Dermatologia, sofisticado |
 | Poppins (bold) | Poppins (regular) | Versatil, clinicas modernas |
 
+## Estrategia de Imagens Placeholder
+
+Para prototipos e desenvolvimento, usar imagens de bancos publicos como placeholder. As imagens finais serao fornecidas pelo cliente.
+
+### Bancos Publicos (uso livre)
+- **Unsplash** (`https://images.unsplash.com/photo-ID?w=WIDTH&h=HEIGHT&fit=crop`)
+- **Pexels** (`https://images.pexels.com/photos/ID/pexels-photo-ID.jpeg?w=WIDTH&h=HEIGHT&fit=crop`)
+- **Picsum** (`https://picsum.photos/WIDTH/HEIGHT`) — para placeholders rapidos
+
+### Mapeamento por Tipo de Imagem
+| Tipo | Buscar no Unsplash/Pexels | Tamanho | Formato |
+|------|---------------------------|---------|---------|
+| Hero background | `[segmento] + professional` | 1920x1080 | WebP |
+| Hero split image | `[segmento] + person + professional` | 800x600 | WebP |
+| Foto profissional/medico | `doctor portrait` ou `professional headshot` | 600x600 | WebP |
+| Logos clientes | Usar SVG placeholder cinza com texto | 200x60 | SVG |
+| Icones de beneficios | Nao usar foto — usar SVG/emoji como placeholder | 48x48 | SVG |
+| Depoimentos (foto) | `person portrait professional` | 128x128 | WebP |
+| Before/After | `skin care results` ou `dental smile` | 600x400 | WebP |
+| Team/Equipe | `team meeting office` | 800x500 | WebP |
+| Background secao | `abstract gradient` ou `minimal texture` | 1920x600 | WebP |
+
+### Convencao de Nomeacao
+Ao usar placeholders, SEMPRE adicionar comentario no HTML:
+```html
+<!-- PLACEHOLDER: Substituir por foto real do [descricao] -->
+<img src="https://images.unsplash.com/photo-XXX?w=800&h=600&fit=crop" alt="[alt descritivo]" width="800" height="600" loading="lazy">
+```
+
+### Regras
+- SEMPRE marcar placeholders com comentario HTML `<!-- PLACEHOLDER: ... -->`
+- SEMPRE usar dimensoes reais que o layout espera (width/height corretos)
+- SEMPRE usar `?fit=crop` para garantir proporcao correta
+- NUNCA usar a mesma foto placeholder em 2 lugares diferentes
+- Para logos de clientes: criar SVG retangulares cinza com texto "Logo Cliente N"
+- Informar ao @frontend a lista de todas as imagens placeholder usadas e suas dimensoes
+
 ## Decisoes Autonomas
 
 Quando nao houver briefing visual explicito, Luna decide sobre:

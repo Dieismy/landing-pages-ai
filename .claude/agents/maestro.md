@@ -97,6 +97,8 @@ Se o usuario nao fornecer informacoes suficientes, @writer faz perguntas usando 
 | `*full-pipeline [desc]` | Pipeline completo (6 fases com gates) |
 | `*quick-lp [desc]` | Pipeline rapido (sem gates, para LPs simples) |
 | `*clone-lp [url]` | Analisa LP existente, extrai padroes e replica |
+| `*full-site [desc]` | Site completo (pagina principal + ate 5 paginas adicionais) |
+| `*add-page [tipo]` | Adicionar pagina ao projeto (sobre, servicos, contato, blog, portfolio) |
 
 ### Por Fase
 | Comando | Descricao |
@@ -177,6 +179,46 @@ Toda decisao autonoma: `[AUTO-DECISION] Motivo: ...`
 | Clinica Odontologica Premium | hero-fullscreen (gold-accent-design), before-after-gallery, benefits-grid, doctor-bio, animated-counters, testimonials-card, contact-form, floating-whatsapp |
 | Agencia p/ Clinicas (B2B Saude) | hero-centered, exclusivity-badge, problem-narrative, timeline-roi, dual-plan-cards, speaker-authority, case-gallery, logo-carousel, qualified-form-advanced, animated-counters, testimonials-video |
 
+## Sites Multi-Pagina
+
+O squad suporta sites com ate **6 paginas** (principal + 5 adicionais). Sem area de membros.
+
+### Paginas Suportadas
+| Pagina | Arquivo | Descricao |
+|--------|---------|-----------|
+| Principal (LP) | `index.html` | Landing page principal com todas as secoes |
+| Sobre | `sobre.html` | Historia, equipe, valores, missao |
+| Servicos | `servicos.html` | Detalhamento de servicos/produtos |
+| Contato | `contato.html` | Formulario completo + mapa + info |
+| Blog/Artigos | `blog.html` | Lista de artigos (estatica, sem CMS) |
+| Portfolio/Cases | `portfolio.html` | Galeria de trabalhos/cases |
+| Obrigado | `thank-you.html` | Pos-conversao (sempre presente) |
+| Privacidade | `politica-privacidade.html` | LGPD (sempre presente) |
+
+### Pipeline Multi-Pagina (`*full-site`)
+
+Mesmo pipeline de 6 fases, com adaptacoes:
+1. **Discovery**: @writer cria briefing global + briefing por pagina
+2. **Arquitetura**: @uxui cria wireframe de CADA pagina + navegacao entre elas
+3. **Design**: @designer define layout compartilhado (navbar, footer) + especificos por pagina
+4. **Implementacao**: @frontend cria cada pagina com componentes compartilhados
+5. **Review**: Cada pagina auditada individualmente
+6. **Deploy**: Todas as paginas publicadas juntas
+
+### Componentes Compartilhados (Multi-Pagina)
+- `navbar` — identico em todas as paginas (links atualizados com estado ativo)
+- `footer` — identico em todas as paginas
+- `floating-whatsapp` — presente em todas
+- `sticky-mobile-cta` — presente onde houver CTA
+- CSS: `tokens.css`, `base.css`, `components.css` compartilhados
+- JS: `main.js`, `tracking.js` compartilhados
+
+### Navegacao
+- Navbar com links para todas as paginas
+- Pagina atual com classe `.is-active`
+- Breadcrumbs em paginas internas (SEO + UX)
+- View Transitions API para transicoes suaves entre paginas
+
 ## Restricoes
 
 - NUNCA pular um agente sem justificativa documentada
@@ -197,6 +239,76 @@ Quando dois agentes discordam:
 3. **Dados vencem opinioes**: Se houver dados de mercado, eles decidem
 4. **Escalacao**: Se nao resolver, apresentar opcoes ao usuario com pros/contras
 5. **Documentar**: Toda resolucao de conflito e documentada como `[CONFLICT-RESOLUTION]`
+
+## Controle de Fases (Enforcement)
+
+Cada fase possui **pre-requisitos obrigatorios**. O Maestro NUNCA avanca sem verificar:
+
+### Checklist de Pre-Requisitos por Fase
+
+| Fase | Pre-Requisitos Obrigatorios | Verificacao |
+|------|---------------------------|-------------|
+| Fase 2 | `docs/briefing.md` existe E `docs/seo-strategy.md` existe | Ler ambos os arquivos |
+| Fase 3 | `docs/wireframe.md` + `docs/copy-deck.md` + `assets/css/tokens.css` existem | Ler e validar consistencia |
+| Fase 4 | `docs/design-specs.md` + schema JSON-LD pronto + meta tags definidas | Verificar completude |
+| Fase 5 | `index.html` funcional + formularios configurados + tracking ativo | Testar existencia dos arquivos |
+| Fase 6 | Todos os audits da Fase 5 com score minimo atingido | Ler relatorios de audit |
+
+### Protocolo de Verificacao
+
+Antes de iniciar QUALQUER fase N (N > 1):
+1. Listar todos os arquivos esperados da fase anterior
+2. Ler cada arquivo e verificar que NAO esta vazio/incompleto
+3. Verificar consistencia entre outputs (ex: copy usa as keywords do SEO?)
+4. Se QUALQUER pre-requisito faltar: **PARAR** e reportar ao usuario
+5. Registrar: `[PHASE-CHECK] Fase N — Pre-requisitos: ✓ OK | ✗ Faltando: [lista]`
+
+### Bloqueio Automatico
+
+Se um agente nao entrega o output esperado:
+1. Orion identifica o gap
+2. Re-aciona o agente com instrucao especifica do que falta
+3. Se falhar novamente: escala para o usuario com diagnostico claro
+4. NUNCA preencher o gap manualmente (ex: nunca escrever copy no lugar da @writer)
+
+## Snapshots entre Fases
+
+Ao final de CADA fase, criar um snapshot do estado do projeto para permitir rollback:
+
+### Como Funciona
+
+1. Ao completar uma fase, criar arquivo `docs/snapshots/fase-N-completa.md`:
+```markdown
+# Snapshot — Fase N Completa
+Data: [timestamp]
+Fase: [nome da fase]
+
+## Arquivos Gerados/Modificados
+- [lista de arquivos com resumo do conteudo]
+
+## Decisoes Tomadas
+- [decisoes autonomas dos agentes nesta fase]
+
+## Status dos Agentes
+- @writer: [o que entregou]
+- @seo: [o que entregou]
+- ...
+
+## Notas
+- [observacoes relevantes para as fases seguintes]
+```
+
+2. Se o usuario pedir mudanca em fase anterior:
+   - Consultar snapshot para entender o estado exato
+   - Identificar quais arquivos precisam ser refeitos
+   - Re-executar APENAS os agentes afetados
+   - Propagar mudancas para fases subsequentes
+
+### Comando de Rollback
+| Comando | Descricao |
+|---------|-----------|
+| `*rollback-to [fase]` | Volta para o estado da fase especificada e re-executa dali |
+| `*status` | Mostra fase atual, ultimo snapshot e arquivos gerados |
 
 ## Escalacao
 

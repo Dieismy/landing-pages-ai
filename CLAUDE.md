@@ -2,7 +2,7 @@
 
 ## Visao Geral
 
-Este repositorio contem um squad de agentes IA especializados em criacao de landing pages de alta conversao. Cada agente representa um profissional com 15+ anos de experiencia e trabalham em conjunto seguindo um pipeline estruturado. O sistema foi modelado a partir da analise de LPs reais de alta performance no mercado brasileiro.
+Este repositorio contem um squad de agentes IA especializados em criacao de landing pages e sites de alta conversao (ate 6 paginas). Cada agente representa um profissional com 15+ anos de experiencia e trabalham em conjunto seguindo um pipeline estruturado com controle de fases, snapshots e QA integrado. O sistema foi modelado a partir da analise de LPs reais de alta performance no mercado brasileiro.
 
 ## Como Usar
 
@@ -53,6 +53,11 @@ Cada fase tem um gate de qualidade. O @maestro coordena tudo automaticamente.
 | `@maestro *only-seo [url]` | Apenas audit SEO (@seo) |
 | `@maestro *only-review` | Review completo (todos auditam) |
 | `@maestro *clone-lp [url]` | Analisa uma LP existente e replica estrutura/padroes |
+| `@maestro *full-site [desc]` | Site completo (principal + ate 5 paginas adicionais) |
+| `@maestro *add-page [tipo]` | Adicionar pagina ao projeto (sobre, servicos, contato, blog, portfolio) |
+| `@maestro *status` | Mostra fase atual, ultimo snapshot e arquivos gerados |
+| `@maestro *rollback-to [fase]` | Volta ao estado de uma fase e re-executa dali |
+| `@frontend *qa-test` | Teste completo: cross-browser, funcional, acessibilidade, e2e |
 
 ## Regras Globais do Squad
 
@@ -64,6 +69,9 @@ Cada fase tem um gate de qualidade. O @maestro coordena tudo automaticamente.
 6. **SEO**: Meta tags completas, schema JSON-LD, URLs amigaveis, Core Web Vitals.
 7. **LGPD**: Banner de cookies, consentimento, coleta minima de dados.
 8. **Codigo limpo**: Zero dependencias desnecessarias. Vanilla > framework. Sem bloat.
+9. **QA obrigatorio**: Teste cross-browser, funcional e de acessibilidade antes de qualquer deploy.
+10. **Snapshots entre fases**: Cada fase gera snapshot em `docs/snapshots/` para permitir rollback.
+11. **Imagens placeholder**: Usar Unsplash/Pexels durante desenvolvimento, marcar com `<!-- PLACEHOLDER -->` para substituicao posterior.
 
 ## Stack Tecnologico
 
@@ -99,6 +107,7 @@ Cada fase tem um gate de qualidade. O @maestro coordena tudo automaticamente.
 
 ## Estrutura do Projeto Gerado
 
+### Landing Page (1-2 paginas)
 ```
 projeto-lp/
 ├── .claude/
@@ -135,10 +144,36 @@ projeto-lp/
 │   ├── briefing.md          # Briefing do projeto
 │   ├── seo-strategy.md      # Estrategia SEO
 │   ├── wireframe.md         # Wireframe e fluxo UX
-│   └── copy-deck.md         # Todo o conteudo textual
+│   ├── copy-deck.md         # Todo o conteudo textual
+│   └── snapshots/           # Snapshots de cada fase (rollback)
+│       ├── fase-1-completa.md
+│       ├── fase-2-completa.md
+│       └── ...
 └── scripts/
     ├── optimize-images.sh   # Script de otimizacao de imagens
     └── deploy.sh            # Script de deploy
+```
+
+### Site Multi-Pagina (ate 6 paginas)
+```
+projeto-site/
+├── [mesma estrutura acima, mais:]
+├── sobre.html               # Pagina Sobre (historia, equipe, valores)
+├── servicos.html            # Pagina de Servicos (detalhamento)
+├── contato.html             # Pagina de Contato (form completo + mapa)
+├── portfolio.html           # Pagina Portfolio/Cases (galeria)
+├── blog.html                # Pagina Blog (artigos estaticos)
+├── politica-privacidade.html # LGPD
+├── 404.html                 # Pagina de erro customizada
+├── sitemap.xml              # Sitemap para SEO
+├── robots.txt               # Diretivas para crawlers
+├── assets/css/
+│   └── page-*.css           # CSS especifico por pagina (quando necessario)
+└── docs/
+    ├── wireframe-site.md    # Wireframe de todas as paginas
+    ├── copy-deck-sobre.md   # Copy por pagina
+    ├── copy-deck-servicos.md
+    └── copy-deck-compartilhado.md  # Copy compartilhado (navbar, footer)
 ```
 
 ## Componentes Reutilizaveis (Biblioteca)
@@ -242,6 +277,58 @@ navbar-shrink     → Navbar reduz padding e ganha background ao scroll
 - **Idioma do codigo**: Ingles
 - **Idioma da comunicacao e docs**: Portugues (BR)
 
+## Controle de Fases (Enforcement)
+
+O @maestro verifica pre-requisitos ANTES de avancar para a proxima fase:
+
+| Fase | Pre-Requisitos | Arquivos Esperados |
+|------|---------------|-------------------|
+| 2 → | Briefing + SEO Strategy aprovados | `docs/briefing.md`, `docs/seo-strategy.md` |
+| 3 → | Wireframe + Copy + Tokens prontos | `docs/wireframe.md`, `docs/copy-deck.md`, `assets/css/tokens.css` |
+| 4 → | Design specs + Schema + Metas definidos | `docs/design-specs.md` |
+| 5 → | Pagina funcional + Forms + Tracking | `index.html`, `api/submit-form.js` |
+| 6 → | Todos os audits com score minimo | Relatorios de audit |
+
+**Se faltar pre-requisito**: @maestro PARA e reporta. NUNCA pula fase.
+
+## Snapshots entre Fases
+
+Ao completar cada fase, @maestro cria `docs/snapshots/fase-N-completa.md` com:
+- Lista de arquivos gerados/modificados
+- Decisoes autonomas tomadas
+- Status de cada agente
+- Notas para fases seguintes
+
+Permite rollback com `@maestro *rollback-to [fase]`.
+
+## QA — Checklist Obrigatorio (Pre-Deploy)
+
+Antes do deploy (`*setup-deploy`), @frontend executa `*qa-test`:
+
+### Cross-Browser
+- Chrome (desktop + mobile), Safari (desktop + iOS), Firefox, Edge, Samsung Internet
+
+### Breakpoints
+- 375px, 390px, 414px, 768px, 1024px, 1280px, 1440px, 1920px
+
+### Funcional
+- Navbar, formularios, FAQ, carrosseis, contadores, WhatsApp, sticky CTA, links
+
+### Acessibilidade
+- Tab navigation, screen reader, focus visible, contraste, zoom 200%
+
+### Multi-Pagina (se aplicavel)
+- Navegacao entre paginas, breadcrumbs, estado ativo na navbar, View Transitions
+
+## Imagens Placeholder
+
+Durante desenvolvimento, usar bancos publicos (Unsplash, Pexels). Regras:
+- SEMPRE marcar com `<!-- PLACEHOLDER: Substituir por [descricao] -->`
+- SEMPRE usar dimensoes reais (`width`/`height`)
+- NUNCA repetir mesma foto em 2 lugares
+- Logos placeholder: SVG cinza com texto "Logo Cliente N"
+- Cliente fornece fotos finais antes do deploy
+
 ## Metricas de Qualidade (Obrigatorio)
 
 | Metrica | Target | Ferramenta |
@@ -258,3 +345,4 @@ navbar-shrink     → Navbar reduz padding e ganha background ao scroll
 | Mobile-friendly | Pass | Google Mobile Test |
 | Schema validation | Zero errors | Rich Results Test |
 | HTML validation | Zero errors | W3C Validator |
+| QA Test | Pass (zero bugs criticos) | @frontend *qa-test |

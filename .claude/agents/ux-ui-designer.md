@@ -331,6 +331,108 @@ Auditoria de Conversion Rate Optimization:
    - Nao agressiva demais?
 6. **Teste A/B suggestions**: Listar top 5 variaveis para testar com impacto esperado
 
+### `*wireframe-site`
+Criar wireframe para site multi-pagina (principal + ate 5 paginas adicionais):
+
+1. Ler briefing e identificar paginas necessarias
+2. Definir **navegacao global**:
+```
+SITEMAP:
+├── Home (index.html) — LP principal
+├── Sobre (sobre.html)
+├── Servicos (servicos.html)
+├── Portfolio (portfolio.html)
+├── Contato (contato.html)
+├── Blog (blog.html)
+├── Thank You (thank-you.html)
+└── Privacidade (politica-privacidade.html)
+```
+
+3. Criar wireframe de CADA pagina seguindo templates:
+
+**Pagina Sobre**
+```
++-----------------------------------------------------------------+
+| [NAVBAR — identica a LP, com "Sobre" ativo]                     |
++-----------------------------------------------------------------+
+| [Breadcrumb: Home > Sobre]                                       |
+| [H1 — Nome da empresa ou "Quem Somos"]                          |
+| [Texto historia — 2-3 blocos curtos]                             |
+| [Grid: Missao | Visao | Valores — 3 cards]                      |
+| [Equipe — Grid de fotos + nome + cargo] (se aplicavel)          |
+| [Contadores animados — numeros de impacto]                      |
+| [CTA — "Fale Conosco"]                                          |
+| [FOOTER]                                                         |
++-----------------------------------------------------------------+
+```
+
+**Pagina Servicos**
+```
++-----------------------------------------------------------------+
+| [NAVBAR]                                                         |
++-----------------------------------------------------------------+
+| [Breadcrumb: Home > Servicos]                                    |
+| [H1 — "Nossos Servicos"]                                        |
+| [Grid de servicos — card com icone + titulo + desc + CTA]       |
+| [Detalhamento servico 1 — split: texto + imagem]                |
+| [Detalhamento servico 2 — split: imagem + texto]                |
+| [FAQ especifico de servicos]                                     |
+| [CTA Final]                                                      |
+| [FOOTER]                                                         |
++-----------------------------------------------------------------+
+```
+
+**Pagina Contato**
+```
++-----------------------------------------------------------------+
+| [NAVBAR]                                                         |
++-----------------------------------------------------------------+
+| [Breadcrumb: Home > Contato]                                     |
+| [H1 — "Entre em Contato"]                                       |
+| [SPLIT: Info contato (esq) | Formulario completo (dir)]        |
+|   Tel, Email, Endereco      | Nome, Email, Tel, Assunto, Msg    |
+|   Horario atendimento       | Consentimento + CTA               |
+| [Mapa embed — Google Maps / Leaflet]                             |
+| [FOOTER]                                                         |
++-----------------------------------------------------------------+
+```
+
+**Pagina Blog**
+```
++-----------------------------------------------------------------+
+| [NAVBAR]                                                         |
++-----------------------------------------------------------------+
+| [Breadcrumb: Home > Blog]                                        |
+| [H1 — "Blog" ou "Artigos"]                                      |
+| [Grid de artigos — card com imagem + titulo + resumo + data]    |
+| [Paginacao ou "Carregar mais"]                                   |
+| [Sidebar: categorias + newsletter mini-form] (desktop only)     |
+| [FOOTER]                                                         |
++-----------------------------------------------------------------+
+```
+
+**Pagina Portfolio**
+```
++-----------------------------------------------------------------+
+| [NAVBAR]                                                         |
++-----------------------------------------------------------------+
+| [Breadcrumb: Home > Portfolio]                                   |
+| [H1 — "Nossos Cases" ou "Portfolio"]                             |
+| [Filtro por categoria — tabs ou pills]                           |
+| [Grid masonry — card com imagem + titulo + resultado]           |
+| [CTA Final — "Quer resultados assim?"]                           |
+| [FOOTER]                                                         |
++-----------------------------------------------------------------+
+```
+
+4. Definir **fluxo de navegacao** entre paginas:
+   - Navbar como hub principal (presente em todas)
+   - CTAs internos que levam entre paginas (ex: "Ver servicos" na Home → servicos.html)
+   - Breadcrumbs em TODAS as paginas internas
+   - Footer com links para todas as paginas
+
+5. Documentar em `docs/wireframe-site.md`
+
 ## Colaboracao
 
 - **Recebe de**: @writer (briefing, messaging), @seo (requisitos estruturais, heading hierarchy)

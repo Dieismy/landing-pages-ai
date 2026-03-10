@@ -133,6 +133,7 @@ create_dir "$TARGET_DIR/assets/video"
 create_dir "$TARGET_DIR/api"
 create_dir "$TARGET_DIR/docs"
 create_dir "$TARGET_DIR/docs/templates"
+create_dir "$TARGET_DIR/docs/snapshots"
 create_dir "$TARGET_DIR/scripts"
 create_dir "$TARGET_DIR/components"
 
@@ -152,6 +153,18 @@ done
 
 # Settings
 copy_if_not_exists "$SCRIPT_DIR/.claude/settings.json" "$TARGET_DIR/.claude/settings.json"
+
+# Commands (slash commands para atalhos /lp:agente)
+if [[ -d "$SCRIPT_DIR/.claude/commands" ]]; then
+  create_dir "$TARGET_DIR/.claude/commands/lp"
+  for cmd_file in "$SCRIPT_DIR/.claude/commands/lp/"*.md; do
+    if [[ -f "$cmd_file" ]]; then
+      filename=$(basename "$cmd_file")
+      copy_if_not_exists "$cmd_file" "$TARGET_DIR/.claude/commands/lp/$filename"
+    fi
+  done
+  log_success "Slash commands instalados (/lp:maestro, /lp:designer, etc.)"
+fi
 
 # CLAUDE.md
 copy_if_not_exists "$SCRIPT_DIR/CLAUDE.md" "$TARGET_DIR/CLAUDE.md"
@@ -686,19 +699,22 @@ echo ""
 echo -e "  ${BOLD}2.${NC} Inicie o pipeline completo:"
 echo -e "     ${YELLOW}@maestro *full-pipeline [descreva sua LP]${NC}"
 echo ""
-echo -e "  ${BOLD}3.${NC} Ou inicie uma LP rapida:"
+echo -e "  ${BOLD}3.${NC} Ou crie um site completo (ate 6 paginas):"
+echo -e "     ${YELLOW}@maestro *full-site [descreva seu site]${NC}"
+echo ""
+echo -e "  ${BOLD}4.${NC} Ou inicie uma LP rapida:"
 echo -e "     ${YELLOW}@maestro *quick-lp [descreva sua LP]${NC}"
 echo ""
 echo -e "  ${CYAN}─────────────────────────────────────────${NC}"
-echo -e "  ${BOLD}Agentes disponiveis:${NC}"
+echo -e "  ${BOLD}Atalhos (digite /lp no Claude Code):${NC}"
 echo ""
-echo -e "  @maestro  — Orion  — Orquestrador do squad"
-echo -e "  @designer — Luna   — Design visual e tokens"
-echo -e "  @frontend — Max    — HTML, CSS, JS, animacoes"
-echo -e "  @backend  — Atlas  — APIs, forms, analytics"
-echo -e "  @writer   — Sofia  — Copy persuasivo"
-echo -e "  @uxui     — Kai    — Wireframe e UX/CRO"
-echo -e "  @seo      — Neo    — SEO tecnico e tracking"
+echo -e "  ${YELLOW}/lp:maestro${NC}   — Orion  — Orquestrador do squad"
+echo -e "  ${YELLOW}/lp:designer${NC}  — Luna   — Design visual e tokens"
+echo -e "  ${YELLOW}/lp:frontend${NC}  — Max    — HTML, CSS, JS, animacoes"
+echo -e "  ${YELLOW}/lp:backend${NC}   — Atlas  — APIs, forms, analytics"
+echo -e "  ${YELLOW}/lp:writer${NC}    — Sofia  — Copy persuasivo"
+echo -e "  ${YELLOW}/lp:uxui${NC}      — Kai    — Wireframe e UX/CRO"
+echo -e "  ${YELLOW}/lp:seo${NC}       — Neo    — SEO tecnico e tracking"
 echo ""
 echo -e "  ${CYAN}─────────────────────────────────────────${NC}"
 echo -e "  Documentacao: ${YELLOW}CLAUDE.md${NC}"

@@ -358,6 +358,49 @@ serve(async (req) => {
 })
 ```
 
+### `*setup-site-deploy`
+Configurar deploy para site multi-pagina:
+
+1. **Estrutura de rotas**:
+```
+/                    → index.html
+/sobre.html          → sobre.html
+/servicos.html       → servicos.html
+/portfolio.html      → portfolio.html
+/contato.html        → contato.html
+/blog.html           → blog.html
+/thank-you.html      → thank-you.html
+/politica-privacidade.html → politica-privacidade.html
+/api/*               → serverless functions
+/assets/*            → static assets (cache 1 ano)
+```
+
+2. **Redirects e Rewrites** (vercel.json / netlify.toml):
+```json
+{
+  "rewrites": [
+    { "source": "/sobre", "destination": "/sobre.html" },
+    { "source": "/servicos", "destination": "/servicos.html" },
+    { "source": "/portfolio", "destination": "/portfolio.html" },
+    { "source": "/contato", "destination": "/contato.html" },
+    { "source": "/blog", "destination": "/blog.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
+```
+
+3. **404 customizada**: Criar `404.html` com links para paginas principais
+4. **Sitemap**: Servir `sitemap.xml` na raiz
+5. **Robots.txt**: Servir na raiz
+6. **Formularios**: Endpoint unico `/api/submit-form` com campo `form_name` para diferenciar origem
+
 ## Colaboracao
 
 - **Recebe de**: @frontend (forms HTML, integration points), @seo (tracking requirements, UTM structure), @writer (termos legais)

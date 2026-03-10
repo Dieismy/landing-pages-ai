@@ -531,6 +531,76 @@ Auditar e otimizar performance:
 9. Verificar compression (gzip/brotli)
 10. Gerar relatorio com scores e acoes
 
+### `*qa-test`
+Testar a LP/site em multiplos cenarios antes do deploy:
+
+1. **Cross-Browser** (verificar CADA um):
+   - [ ] Chrome (desktop + mobile), Safari (desktop + iOS), Firefox, Edge, Samsung Internet
+
+2. **Breakpoints** (testar TODOS):
+   - [ ] 375px, 390px, 414px, 768px, 1024px, 1280px, 1440px, 1920px
+
+3. **Funcional**:
+   - [ ] Navbar: sticky, menu mobile, links scroll suave
+   - [ ] Hero: CTA clicavel, imagem carrega, animacao de entrada
+   - [ ] Formulario: validacao, submit envia, redirect thank-you
+   - [ ] FAQ: accordion abre/fecha, aria-expanded
+   - [ ] Carrossel: autoplay, navegacao, loop
+   - [ ] Contadores: animam 1x ao entrar viewport
+   - [ ] WhatsApp: link correto com mensagem
+   - [ ] Sticky CTA mobile: aparece/some corretamente
+   - [ ] Links: internos corretos, externos com target="_blank" rel="noopener"
+
+4. **Formulario End-to-End**:
+   - [ ] Campos obrigatorios impedem envio vazio
+   - [ ] Email invalido mostra erro
+   - [ ] Telefone aceita mascara
+   - [ ] Honeypot hidden e funcional
+   - [ ] Submit envia para API, redirect funciona
+   - [ ] UTMs capturados e enviados
+   - [ ] LGPD obrigatorio, botao desabilita durante envio
+
+5. **Acessibilidade**:
+   - [ ] Tab navigation percorre todos elementos na ordem
+   - [ ] Enter/Space ativa botoes, Escape fecha modais
+   - [ ] Screen reader: headings logicos, alt texts
+   - [ ] Focus visible em todos focaveis
+   - [ ] Skip link funcional
+   - [ ] Contraste WCAG AA 4.5:1
+   - [ ] Zoom 200% nao quebra layout
+
+6. **Performance**:
+   - [ ] First paint < 1.5s em 3G
+   - [ ] Imagens com lazy loading (exceto hero)
+   - [ ] Console limpo (zero erros)
+   - [ ] Network: nenhum 404
+
+7. **Multi-Pagina** (se aplicavel):
+   - [ ] Navegacao entre paginas funciona
+   - [ ] Navbar com estado ativo correto
+   - [ ] Breadcrumbs corretos em internas
+   - [ ] Componentes compartilhados identicos
+   - [ ] Links internos entre paginas corretos
+
+**Output**: Relatorio de QA com status e lista de bugs.
+
+### `*build-site`
+Pipeline de implementacao para site multi-pagina (principal + ate 5 paginas):
+
+1. Criar estrutura compartilhada (CSS, JS, navbar, footer)
+2. Criar cada pagina HTML com mesmo `<head>` base
+3. Navbar multi-pagina com `is-active` na pagina atual
+4. Breadcrumbs em paginas internas
+5. View Transitions para navegacao suave:
+```css
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: fade-out 0.2s ease-out; }
+::view-transition-new(root) { animation: fade-in 0.3s ease-in; }
+```
+6. CSS especifico por pagina quando necessario (`page-sobre.css`)
+7. SEO: cada pagina com title, meta description e canonical unicos
+8. Rodar `*qa-test` com teste multi-pagina
+
 ## Data Attributes (Convencao)
 
 Usar data attributes para hooks de JS (nunca classes):

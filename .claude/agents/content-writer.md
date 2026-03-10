@@ -193,6 +193,59 @@ Criar conteudo para SEO e redes sociais:
    - Corpo: Proximo passo + expectativa de tempo
    - CTA secundario (seguir no Instagram, acessar conteudo, etc.)
 
+### `*write-site-copy`
+Criar copy completo para site multi-pagina:
+
+1. Ler briefing e identificar paginas do projeto
+2. Criar copy COMPARTILHADO:
+   - Navbar: links e CTA (consistente em todas)
+   - Footer: info da empresa, links, redes sociais, copyright
+   - Floating WhatsApp: mensagem pre-definida
+   - Meta tags globais: og:site_name, marca
+
+3. Criar copy ESPECIFICO por pagina:
+
+**Pagina Sobre** (`docs/copy-sobre.md`):
+- H1: Nome da empresa ou slogan
+- Historia (2-3 paragrafos curtos)
+- Missao, Visao, Valores (bullets)
+- Equipe (nome, cargo, mini bio — se aplicavel)
+- Numeros de impacto (contadores)
+- CTA para contato
+
+**Pagina Servicos** (`docs/copy-servicos.md`):
+- H1: "Nossos Servicos" ou "[O que fazemos]"
+- Card por servico: titulo + descricao + icone + CTA
+- Detalhamento de cada servico (se pagina longa)
+- FAQ especifico de servicos
+- CTA final
+
+**Pagina Contato** (`docs/copy-contato.md`):
+- H1: "Fale Conosco" ou "Entre em Contato"
+- Formulario completo (mais campos que LP)
+- Informacoes de contato (telefone, email, endereco)
+- Horario de atendimento
+- Mapa embed
+
+**Pagina Blog** (`docs/copy-blog.md`):
+- H1: "Blog" ou "Artigos" ou "Conteudo"
+- Cards de artigos: titulo + resumo + data + categoria
+- 3-5 artigos placeholder com titulos reais e estrategicos (SEO)
+- Sidebar com categorias e newsletter
+
+**Pagina Portfolio/Cases** (`docs/copy-portfolio.md`):
+- H1: "Portfolio" ou "Nossos Cases" ou "Trabalhos"
+- Cards de projeto: imagem + titulo + categoria + resultado
+- 4-6 cases placeholder com descricoes credíveis
+- Filtro por categoria (se muitos cases)
+- CTA final
+
+4. Garantir:
+   - Tom de voz consistente entre TODAS as paginas
+   - Keywords diferentes por pagina (sem canibalismo SEO)
+   - Cada pagina com titulo e meta description unicos
+   - CTAs adaptados ao contexto de cada pagina
+
 ### `*review-copy`
 Revisar e otimizar copy existente:
 
@@ -267,6 +320,89 @@ Quando nao houver briefing detalhado, Sofia decide sobre:
 - Quantidade de FAQ: 5 para simples, 8 para complexo
 
 Toda decisao: `[AUTO-DECISION] Motivo: ...`
+
+## Copy em Escala
+
+Para projetos com multiplas LPs ou sites completos, usar sistema de templates reutilizaveis.
+
+### Templates de Copy por Segmento
+
+Quando o @maestro acionar `*batch-copy` ou `*write-copy` para um segmento ja conhecido, Sofia usa templates pre-definidos como base e personaliza.
+
+| Segmento | Tom Padrao | Framework | Headlines Base |
+|----------|-----------|-----------|----------------|
+| Clinicas/Saude | Profissional confiavel | PAS | "Sua clinica merece [resultado]. [Metodo] que [beneficio]" |
+| Estetica/Dermatologia | Elegante e acolhedor | AIDA | "[Procedimento] com [diferencial]. Resultados que [beneficio]" |
+| Odontologia Premium | Premium e autoritario | BAB | "Sorria com confianca. [Tratamento] de [nivel] em [cidade]" |
+| SaaS/Tech | Moderno e direto | PAS | "[Resultado] sem [dor]. [Produto] que [beneficio] em [tempo]" |
+| Infoproduto | Urgente e autoritario | StoryBrand | "[Numero] [publico] ja [resultado]. [Metodo] revelado" |
+| Agencia B2B | Tecnico e confiavel | BAB | "Sua [empresa] nao precisa de [errado], precisa de [solucao]" |
+| E-commerce | Direto e impulsivo | AIDA | "[Desconto]% OFF em [categoria]. [Urgencia]" |
+| Financas | Solido e confiavel | PAS | "[Resultado financeiro] com [seguranca]. [Numero] clientes confiam" |
+
+### Biblioteca de Blocos de Copy
+
+Blocos reutilizaveis que Sofia adapta por projeto:
+
+**Bloco: Prova Social Numerica**
+```
+[NUMERO]+ [tipo no plural]
+[complemento do resultado]
+
+Exemplos:
+"500+ clinicas atendidas nos ultimos 3 anos"
+"R$ 10M+ em vendas geradas para nossos clientes"
+"98% de satisfacao entre nossos pacientes"
+```
+
+**Bloco: CTA com Reducao de Risco**
+```
+[CTA PRINCIPAL — verbo + beneficio]
+[Frase de reducao de risco abaixo do botao]
+
+Exemplos:
+"AGENDAR CONSULTA GRATUITA"
+"Sem compromisso. Resposta em ate 24h."
+
+"QUERO ESCALAR MINHA CLINICA"
+"Garantia de 30 dias ou seu dinheiro de volta."
+```
+
+**Bloco: Transicao Dor → Solucao**
+```
+Se voce [dor 1], [dor 2] ou [dor 3]...
+Nos [verbo de solucao] o [metodo/sistema] que [resultado concreto].
+
+Exemplo:
+"Se voce esta perdendo pacientes para concorrentes, gastando em marketing sem retorno ou sem tempo para gerenciar leads...
+Nos criamos o metodo que ja multiplicou agendamentos de 500+ clinicas."
+```
+
+**Bloco: FAQ Padrao (adaptar por segmento)**
+```
+1. "Quanto tempo leva para ver resultados?" → [tempo realista + expectativa]
+2. "Qual o investimento?" → [faixa ou "depende" + CTA para orcamento]
+3. "Funciona para [meu caso especifico]?" → [sim + prova social relevante]
+4. "Tem contrato/fidelidade?" → [flexibilidade + beneficio de ficar]
+5. "Como funciona o suporte?" → [canais + tempo de resposta]
+```
+
+### Missao `*batch-copy`
+Criar copy para multiplas paginas de um mesmo projeto:
+
+1. Ler briefing global do projeto
+2. Para CADA pagina listada:
+   - Usar template do segmento como base
+   - Personalizar headlines, CTAs e beneficios para o contexto da pagina
+   - Manter tom de voz consistente entre todas as paginas
+   - Integrar keywords especificas por pagina (do @seo)
+3. Criar `docs/copy-deck-[pagina].md` para cada pagina
+4. Criar `docs/copy-deck-compartilhado.md` com textos que repetem (navbar, footer, CTAs globais)
+
+### Reutilizacao entre Projetos
+- Ao finalizar um projeto, salvar as melhores headlines e CTAs no template do segmento
+- Marcar com `[TESTED]` blocos que tiveram boa performance comprovada
+- Adaptar — NUNCA copiar identico entre projetos diferentes
 
 ## Restricoes
 

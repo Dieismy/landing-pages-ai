@@ -1,8 +1,8 @@
 # 🚀 Landing Pages AI Squad
 
-**Sistema de agentes IA para criacao de landing pages de alta conversao.**
+**Sistema de agentes IA para criacao de landing pages e sites de alta conversao.**
 
-7 agentes especializados trabalhando em conjunto no Claude Code, seguindo um pipeline de 6 fases — do briefing ao deploy. Baseado na analise de LPs reais de alta performance no mercado brasileiro.
+7 agentes especializados trabalhando em conjunto no Claude Code, seguindo um pipeline de 6 fases — do briefing ao deploy. Suporta LPs single-page e sites com ate 6 paginas. Inclui controle de fases, snapshots para rollback, QA automatizado e sistema de placeholders. Baseado na analise de LPs reais de alta performance no mercado brasileiro.
 
 ---
 
@@ -83,6 +83,16 @@ Cada fase tem um **gate de qualidade**. O `@maestro` coordena tudo automaticamen
 | `@maestro *full-pipeline [desc]` | Pipeline completo com todas as 6 fases e gates de qualidade |
 | `@maestro *quick-lp [desc]` | Pipeline rapido sem gates (ideal para prototipos) |
 | `@maestro *clone-lp [url]` | Analisa uma LP existente e replica estrutura/padroes |
+| `@maestro *full-site [desc]` | Site completo (principal + ate 5 paginas adicionais) |
+
+### Controle e QA
+
+| Comando | Descricao |
+|---------|-----------|
+| `@maestro *status` | Mostra fase atual, ultimo snapshot e arquivos gerados |
+| `@maestro *rollback-to [fase]` | Volta ao estado de uma fase e re-executa dali |
+| `@maestro *add-page [tipo]` | Adicionar pagina (sobre, servicos, contato, blog, portfolio) |
+| `@frontend *qa-test` | Teste completo: cross-browser, funcional, acessibilidade |
 
 ### Pipelines Parciais
 
@@ -104,6 +114,9 @@ Cada fase tem um **gate de qualidade**. O `@maestro` coordena tudo automaticamen
 | `@frontend *build-full` | Construir HTML + CSS + JS completo |
 | `@backend *setup-forms` | Configurar formularios e integracoes |
 | `@seo *seo-audit` | Auditoria SEO completa |
+| `@writer *batch-copy` | Copy em escala (multiplas paginas/projetos) |
+| `@uxui *wireframe-site` | Wireframe para site multi-pagina |
+| `@seo *seo-site` | SEO multi-pagina (sitemap, keywords por pagina) |
 
 ---
 
@@ -179,6 +192,20 @@ O `@maestro` (Orion) vai coordenar todos os agentes automaticamente, passando po
 | INP | < 200ms |
 | CLS | < 0.1 |
 | Peso da pagina (sem imagens) | < 500KB |
+| QA Test (cross-browser + funcional) | Pass |
+
+---
+
+## 🆕 Novidades v1.1
+
+| Feature | Descricao |
+|---------|-----------|
+| **Sites Multi-Pagina** | Suporte a principal + 5 paginas (sobre, servicos, contato, blog, portfolio) |
+| **Controle de Fases** | Pre-requisitos obrigatorios entre fases — @maestro NUNCA pula fase |
+| **Snapshots** | Backup automatico ao final de cada fase, com rollback via `*rollback-to` |
+| **QA Automatizado** | `*qa-test` — cross-browser, breakpoints, funcional, acessibilidade |
+| **Copy em Escala** | Templates por segmento, blocos reutilizaveis, `*batch-copy` |
+| **Imagens Placeholder** | Unsplash/Pexels durante dev, marcadas com `<!-- PLACEHOLDER -->` |
 
 ---
 
