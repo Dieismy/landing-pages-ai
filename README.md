@@ -12,7 +12,7 @@
 
 ```bash
 # 1. Clone o repositorio dentro do seu projeto
-git clone https://github.com/seu-usuario/landing-pages-ai.git .lp-squad
+git clone https://github.com/Dieismy/landing-pages-ai.git .lp-squad
 
 # 2. Execute o instalador
 bash .lp-squad/install.sh .
