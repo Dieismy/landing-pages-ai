@@ -1,0 +1,31 @@
+{
+  "name": "landing-pages-ai",
+  "version": "1.0.0",
+  "description": "AI Squad para criacao de landing pages de alta conversao — 7 agentes especializados com pipeline automatizado",
+  "main": "install.sh",
+  "bin": {
+    "landing-pages-ai": "./install.sh"
+  },
+  "scripts": {
+    "install-squad": "bash install.sh",
+    "postinstall": "echo 'Execute: npx landing-pages-ai /caminho/do/projeto'"
+  },
+  "keywords": [
+    "landing-page",
+    "ai-agents",
+    "claude-code",
+    "web-design",
+    "conversion",
+    "squad",
+    "landing-pages-ai"
+  ],
+  "author": "Midvision Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -169,6 +169,49 @@ Componentes padrao que aparecem em 90%+ das LPs analisadas:
 | `video-facade` | Thumbnail de video que carrega player sob demanda | Performance |
 | `scroll-reveal` | Animacao fade-in/slide-up ao scroll (GSAP) | Renke Studio |
 | `floating-whatsapp` | Botao flutuante de WhatsApp | Padrao BR |
+| `before-after-gallery` | Grid de fotos antes/depois (casos clinicos) | IRO Odontologia |
+| `services-gallery` | Grid de imagens com hover overlay + titulo do servico | Dra. Camila Rotta |
+| `doctor-bio` | Secao sobre o profissional: foto + bio + credenciais | Dra. Camila Rotta |
+| `map-embed` | Mapa de localizacao embed (Google Maps / Leaflet) | Dra. Camila Rotta |
+| `hero-fullscreen` | Hero fullscreen com video/imagem de fundo + overlay escuro | IRO Odontologia |
+| `timeline-roi` | Timeline de implementacao com indicadores de ROI progressivo | Clinica 10x |
+| `dual-plan-cards` | Comparacao de 2 planos lado a lado com destaque | Clinica 10x |
+| `speaker-authority` | Grid de fotos em eventos/palestras (autoridade) | Clinica 10x |
+| `case-gallery` | Grid de screenshots de resultados + logos de clientes | Clinica 10x |
+| `qualified-form-advanced` | Form com 8+ campos incluindo selects de especialidade e faturamento | Clinica 10x |
+| `problem-narrative` | Secao de dor em formato narrativo com perguntas reflexivas | Clinica 10x |
+| `exclusivity-badge` | Badge de exclusividade/filtro ("Exclusivo para clinicas que faturam acima de R$200k") | Clinica 10x |
+| `testimonials-google` | Cards de depoimentos do Google (estrelas + nome + data + texto) | Dra. Camila Rotta |
+| `section-divider-accent` | Linhas decorativas coloridas separando secoes | IRO + Clinica 10x |
+| `gold-accent-design` | Design premium com acentos dourados/gold em fundo escuro | IRO Odontologia |
+
+## Padroes Visuais por Segmento (Estetica & Saude)
+
+LPs do segmento de estetica e saude possuem padroes visuais especificos:
+
+### Clinicas de Estetica / Dermatologia
+- **Paleta**: Tons neutros (bege, nude, off-white) + acentos dourados ou rose
+- **Tipografia**: Fontes serifadas elegantes para headings (Playfair, DM Serif), sans-serif clean para body
+- **Fotos**: Retratos profissionais do medico, antes/depois de procedimentos, close-ups de pele/rosto
+- **Layout**: Espacoso, muito whitespace, secoes amplas com respiro visual
+- **Elementos**: Linhas finas decorativas, formas organicas, overlays translucidos
+- **Referencia**: Dra. Camila Rotta — bege (#C5A882) + branco + serif headings
+
+### Clinicas Odontologicas Premium
+- **Paleta**: Preto/dark + dourado/gold (#D4A853) — transmite premium e exclusividade
+- **Tipografia**: Sans-serif bold para headings, contraste extremo (branco no escuro)
+- **Fotos**: Close-ups de sorrisos, antes/depois, fotos do profissional em ambiente premium
+- **Layout**: Full-width sections, fundos escuros alternando com claros, bordas douradas
+- **Elementos**: Gradientes gold, linhas decorativas douradas, icones flat dourados
+- **Referencia**: IRO Odontologia — preto + dourado (#FFD103) + fotos em grid
+
+### Agencias de Marketing para Clinicas (B2B Saude)
+- **Paleta**: Amarelo/gold accent (#FFD103) + preto/escuro — energia e profissionalismo
+- **Tipografia**: Sans-serif moderna, tamanhos grandes, bold
+- **Fotos**: Equipe, palcos, logos de clientes, prints de resultados
+- **Layout**: Denso em informacao, muitas secoes, prova social pesada
+- **Elementos**: Badges de exclusividade, timelines, contadores grandes, carrosseis multiplos
+- **Referencia**: Clinica 10x — amarelo + preto + narrative copy + 17 secoes
 
 ## Padroes de Animacao (GSAP + ScrollTrigger)
 

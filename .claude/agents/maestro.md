@@ -173,6 +173,9 @@ Toda decisao autonoma: `[AUTO-DECISION] Motivo: ...`
 | Venda Direta | hero-split, pain-points, benefits-grid, pricing-table, testimonials-card, faq-accordion, cta-section, animated-counters |
 | Infoproduto | hero-centered, pain-points, how-it-works, testimonials-video, pricing-table, faq-accordion, cta-section, animated-counters |
 | Evento/Webinar | hero-centered, trust-bar, how-it-works, testimonials-card, contact-form, animated-counters |
+| Clinica Estetica/Dermatologia | hero-fullscreen, doctor-bio, services-gallery, before-after-gallery, testimonials-google, map-embed, contact-form, floating-whatsapp |
+| Clinica Odontologica Premium | hero-fullscreen (gold-accent-design), before-after-gallery, benefits-grid, doctor-bio, animated-counters, testimonials-card, contact-form, floating-whatsapp |
+| Agencia p/ Clinicas (B2B Saude) | hero-centered, exclusivity-badge, problem-narrative, timeline-roi, dual-plan-cards, speaker-authority, case-gallery, logo-carousel, qualified-form-advanced, animated-counters, testimonials-video |
 
 ## Restricoes
 

@@ -114,7 +114,10 @@ Revisar o design implementado pelo @frontend:
 
 | Segmento | Primary | Accent | Vibe |
 |----------|---------|--------|------|
-| Clinicas/Saude | Azul (#0066CC) ou Verde (#00875A) | Dourado ou Laranja | Confianca, profissionalismo |
+| Clinicas/Saude (geral) | Azul (#0066CC) ou Verde (#00875A) | Dourado ou Laranja | Confianca, profissionalismo |
+| Estetica/Dermatologia | Bege (#C5A882) ou Nude (#D4B896) | Dourado rose (#B8977E) | Elegancia, sofisticacao, cuidado |
+| Odontologia Premium | Preto (#111) ou Dark (#1A1A1A) | Dourado (#D4A853) ou Gold (#FFD103) | Premium, exclusividade, confianca |
+| Agencia p/ Clinicas | Amarelo (#FFD103) ou Dark (#1A1A1A) | Amarelo (#FFD103) | Energia, resultado, autoridade |
 | SaaS/Tech | Azul (#2563EB) ou Roxo (#7C3AED) | Verde (#10B981) | Inovacao, modernidade |
 | Infoproduto | Preto (#111) ou Azul escuro | Amarelo (#F59E0B) ou Vermelho (#EF4444) | Urgencia, autoridade |
 | E-commerce | Depende da marca | Vermelho (#DC2626) ou Laranja (#F97316) | Acao, impulso |
@@ -130,6 +133,9 @@ Revisar o design implementado pelo @frontend:
 | Space Grotesk (bold) | Work Sans (regular) | Tech, startup |
 | Playfair Display (bold) | Lato (regular) | Sofisticado, premium |
 | Sora (bold) | Nunito Sans (regular) | Amigavel, moderno |
+| Cormorant Garamond (bold) | Lato (regular) | Estetica, luxo, clinicas premium |
+| Playfair Display (bold) | Montserrat (regular) | Dermatologia, sofisticado |
+| Poppins (bold) | Poppins (regular) | Versatil, clinicas modernas |
 
 ## Decisoes Autonomas
 
